@@ -49,6 +49,15 @@ pipeline {
             }
         }
 
+        stage('Health Check') {
+            steps {
+                sh '''
+                    sleep 10
+                    curl -f http://localhost:3000 || exit 1
+                '''
+            }
+        }
+
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
@@ -62,6 +71,14 @@ pipeline {
                         docker push $IMAGE_NAME:latest
                     '''
                 }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                sh '''
+                    docker image prune -f
+                '''
             }
         }
     }
