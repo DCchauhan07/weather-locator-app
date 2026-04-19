@@ -9,9 +9,15 @@
 <body>
   <div class="container">
     <h1>Weather Locator App</h1>
+    <p class="subtitle">Search live weather information by city</p>
 
     <form action="/weather" method="POST">
-      <input type="text" name="city" placeholder="Enter city name" required>
+      <input 
+        type="text" 
+        name="city" 
+        placeholder="Enter city name" 
+        required
+      >
       <button type="submit">Get Weather</button>
     </form>
 
@@ -22,13 +28,37 @@
     <% if (weather) { %>
       <div class="weather-card">
         <h2><%= weather.city %>, <%= weather.country %></h2>
-        <p><strong>Temperature:</strong> <%= weather.temperature %> °C</p>
-        <p><strong>Feels Like:</strong> <%= weather.feels_like %> °C</p>
-        <p><strong>Humidity:</strong> <%= weather.humidity %>%</p>
-        <p><strong>Wind Speed:</strong> <%= weather.wind_speed %> m/s</p>
-        <p><strong>Condition:</strong> <%= weather.condition %></p>
+
+        <div class="weather-row">
+          <span class="label">Temperature</span>
+          <span class="value"><%= weather.temperature %> °C</span>
+        </div>
+
+        <div class="weather-row">
+          <span class="label">Feels Like</span>
+          <span class="value"><%= weather.feels_like %> °C</span>
+        </div>
+
+        <div class="weather-row">
+          <span class="label">Humidity</span>
+          <span class="value"><%= weather.humidity %>%</span>
+        </div>
+
+        <div class="weather-row">
+          <span class="label">Wind Speed</span>
+          <span class="value"><%= weather.wind_speed %> kph</span>
+        </div>
+
+        <div class="weather-row">
+          <span class="label">Condition</span>
+          <span class="value"><%= weather.condition %></span>
+        </div>
       </div>
     <% } %>
+
+    <p class="footer-text">
+      Powered by Node.js, Jenkins, Docker, and WeatherAPI
+    </p>
   </div>
 </body>
 </html>
