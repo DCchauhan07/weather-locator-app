@@ -32,7 +32,8 @@ app.post('/weather', async (req, res) => {
       feels_like: data.current.feelslike_c,
       humidity: data.current.humidity,
       wind_speed: data.current.wind_kph,
-      condition: data.current.condition.text
+      condition: data.current.condition.text,
+      icon: data.current.condition.icon
     };
 
     res.render('index', { weather, error: null, city });
@@ -45,6 +46,10 @@ app.post('/weather', async (req, res) => {
       city
     });
   }
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
 });
 
 app.listen(PORT, () => {

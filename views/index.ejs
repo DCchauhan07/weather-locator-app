@@ -7,11 +7,13 @@
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <div class="background-overlay"></div>
+
   <div class="container">
     <h1>Weather Locator App</h1>
     <p class="subtitle">Search live weather information by city</p>
 
-    <form action="/weather" method="POST">
+    <form action="/weather" method="POST" class="weather-form">
       <input 
         type="text" 
         name="city" 
@@ -27,38 +29,42 @@
 
     <% if (weather) { %>
       <div class="weather-card">
-        <h2><%= weather.city %>, <%= weather.country %></h2>
+        <div class="weather-header">
+          <div>
+            <h2><%= weather.city %>, <%= weather.country %></h2>
+            <p class="condition-text"><%= weather.condition %></p>
+          </div>
 
-        <div class="weather-row">
-          <span class="label">Temperature</span>
-          <span class="value"><%= weather.temperature %> °C</span>
+          <div class="weather-icon-box">
+            <img src="https:<%= weather.icon %>" alt="Weather Icon" class="weather-icon">
+          </div>
         </div>
 
-        <div class="weather-row">
-          <span class="label">Feels Like</span>
-          <span class="value"><%= weather.feels_like %> °C</span>
+        <div class="temperature-section">
+          <span class="temp-main"><%= weather.temperature %>°C</span>
+          <span class="temp-sub">Feels like <%= weather.feels_like %>°C</span>
         </div>
 
-        <div class="weather-row">
-          <span class="label">Humidity</span>
-          <span class="value"><%= weather.humidity %>%</span>
-        </div>
+        <div class="weather-details">
+          <div class="detail-box">
+            <h3>Humidity</h3>
+            <p><%= weather.humidity %>%</p>
+          </div>
 
-        <div class="weather-row">
-          <span class="label">Wind Speed</span>
-          <span class="value"><%= weather.wind_speed %> kph</span>
-        </div>
+          <div class="detail-box">
+            <h3>Wind Speed</h3>
+            <p><%= weather.wind_speed %> kph</p>
+          </div>
 
-        <div class="weather-row">
-          <span class="label">Condition</span>
-          <span class="value"><%= weather.condition %></span>
+          <div class="detail-box">
+            <h3>Condition</h3>
+            <p><%= weather.condition %></p>
+          </div>
         </div>
       </div>
     <% } %>
 
-    <p class="footer-text">
-      Powered by Node.js, Jenkins, Docker, and WeatherAPI
-    </p>
+    <p class="footer-text">Powered by Node.js, Jenkins, Docker, and WeatherAPI</p>
   </div>
 </body>
 </html>
